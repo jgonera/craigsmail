@@ -6,5 +6,5 @@ Watch Craigslist RSS feed and send an email when something new shows up.
 
 Create `config.yaml` (see `config.yaml.example`) and run:
 
-    ruby criagsmail.rb
+    ruby craigsmail.rb
 
