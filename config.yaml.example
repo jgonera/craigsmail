@@ -1,0 +1,11 @@
+:urls:
+  - http://sfbay.craigslist.org/search/sfc/apa?maxAsk=3000&nh=1&nh=10&nh=12&nh=149&nh=156&nh=18&nh=19&nh=20&nh=21&nh=25&nh=4&nh=6&nh=8&s=0&sale_date=-
+  - http://charlottesville.craigslist.org/search/cto?maxAsk=5000&sort=date&srchType=T
+
+:recipient: your@email.com
+:smtp:
+  :address: smtp.gmail.com
+  :port: 587
+  :user_name: user
+  :password: password
+:delay: 300
