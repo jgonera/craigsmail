@@ -41,7 +41,7 @@ loop do
 
     results.each do |result|
       Mail.deliver do
-        from 'craigsmail@noreply.com'
+        from 'craigsmail@dummy.com'
         to config[:recipient]
         subject 'Craigsmail: ' + result[:title]
         body result[:link] + "\n\n" + result[:description]
