@@ -43,8 +43,8 @@ loop do
       Mail.deliver do
         from 'craigsmail@dummy.com'
         to config[:recipient]
-        subject 'Craigsmail: ' + result[:title]
-        body result[:link] + "\n\n" + result[:description]
+        subject 'Craigsmail: ' + result[:title].encode!('UTF-8', 'UTF-8', invalid: :replace)
+        body result[:link] + "\n\n" + result[:description].encode!('UTF-8', 'UTF-8', invalid: :replace)
       end
     end
   end
