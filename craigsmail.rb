@@ -46,6 +46,7 @@ loop do
       Mail.deliver do
         from 'craigsmail@dummy.com'
         to config[:recipient]
+        reply_to config[:recipient]
         subject 'Craigsmail: ' + result[:title]
         body result[:link] + "\n\n" + result[:description]
       end
