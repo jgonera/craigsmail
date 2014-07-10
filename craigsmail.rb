@@ -12,6 +12,10 @@ Mail.defaults do
   delivery_method :smtp, config[:smtp]
 end
 
+def fix_string(string)
+  string.encode!('UTF-8', 'UTF-8', invalid: :replace)
+end
+
 
 loop do
   results = []
@@ -21,13 +25,13 @@ loop do
     doc = Nokogiri::XML(open(url))
 
     doc.css('item').each do |item|
-      link = item.css('link').first.content
+      link = fix_string(item.css('link').first.content)
 
       unless fetched.include?(link) || first_run
         results << {
           link: link,
-          title: CGI.unescapeHTML(item.css('title').first.content),
-          description: item.css('description').first.content
+          title: CGI.unescapeHTML(fix_string(item.css('title').first.content)),
+          description: fix_string(item.css('description').first.content)
         }
       end
 
@@ -43,8 +47,8 @@ loop do
       Mail.deliver do
         from 'craigsmail@dummy.com'
         to config[:recipient]
-        subject 'Craigsmail: ' + result[:title].encode!('UTF-8', 'UTF-8', invalid: :replace)
-        body result[:link] + "\n\n" + result[:description].encode!('UTF-8', 'UTF-8', invalid: :replace)
+        subject 'Craigsmail: ' + result[:title]
+        body result[:link] + "\n\n" + result[:description]
       end
     end
   end
