@@ -4,13 +4,8 @@ require 'cgi'
 require 'nokogiri'
 require 'mail'
 
-config = YAML.load_file('config.yaml')
 fetched = {}
 first_run = true
-
-Mail.defaults do
-  delivery_method :smtp, config[:smtp]
-end
 
 def fix_string(string)
   string.encode!('UTF-8', 'UTF-8', invalid: :replace)
@@ -18,6 +13,10 @@ end
 
 
 loop do
+  config = YAML.load_file('config.yaml')
+  Mail.defaults do
+    delivery_method :smtp, config[:smtp]
+  end
   results = []
 
   config[:urls].each do |url|
