@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'yaml'
 require 'open-uri'
 require 'cgi'
@@ -8,7 +9,7 @@ fetched = {}
 first_run = true
 
 def fix_string(string)
-  string.encode!('UTF-8', 'UTF-8', invalid: :replace)
+  string.encode!('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
 end
 
 
