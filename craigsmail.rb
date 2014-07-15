@@ -22,7 +22,13 @@ loop do
 
   config[:urls].each do |url|
     url += '&format=rss'
-    doc = Nokogiri::XML(open(url))
+    # try fetching, if error, proceed to next URL
+    begin
+      doc = Nokogiri::XML(open(url))
+    rescue => e
+      puts "#{e} while fetching or parsing #{url}"
+      next
+    end
 
     doc.css('item').each do |item|
       link = fix_string(item.css('link').first.content)
